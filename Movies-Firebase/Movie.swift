@@ -13,4 +13,5 @@ struct Movie {
     var description: String
     var studio: String
     var rating: Double
+    var userId: String
 }
