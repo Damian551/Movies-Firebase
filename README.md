@@ -5,6 +5,7 @@
 * Created the model
 * Helped for creating Firebase Auth
 * Added Screens as ViewController
+* Added Fields 
 
 ### Gurpreet Kaur
 * Created ViewController Classes
