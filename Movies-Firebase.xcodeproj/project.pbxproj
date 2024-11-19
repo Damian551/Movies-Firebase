@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		06AE79672CECFAFE00FC01EF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 06AE79662CECFAFE00FC01EF /* FirebaseAuth */; };
+		06AE79692CECFAFE00FC01EF /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 06AE79682CECFAFE00FC01EF /* FirebaseCore */; };
+		06AE796B2CECFAFE00FC01EF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 06AE796A2CECFAFE00FC01EF /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		C984DCCE2CECF878007F65A1 /* Movies-Firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movies-Firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06AE79692CECFAFE00FC01EF /* FirebaseCore in Frameworks */,
+				06AE79672CECFAFE00FC01EF /* FirebaseAuth in Frameworks */,
+				06AE796B2CECFAFE00FC01EF /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = "Movies-Firebase";
 			packageProductDependencies = (
+				06AE79662CECFAFE00FC01EF /* FirebaseAuth */,
+				06AE79682CECFAFE00FC01EF /* FirebaseCore */,
+				06AE796A2CECFAFE00FC01EF /* FirebaseFirestore */,
 			);
 			productName = "Movies-Firebase";
 			productReference = C984DCCE2CECF878007F65A1 /* Movies-Firebase.app */;
@@ -107,6 +119,9 @@
 			);
 			mainGroup = C984DCC52CECF878007F65A1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				06AE79652CECFAFE00FC01EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C984DCCF2CECF878007F65A1 /* Products */;
 			projectDirPath = "";
@@ -143,8 +158,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Movies-Firebase/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -159,6 +175,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.georgiancollege.BolajiHelloWorld.Movies-Firebase";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -170,8 +187,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Movies-Firebase/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -186,6 +204,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ca.georgiancollege.BolajiHelloWorld.Movies-Firebase";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -333,6 +352,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		06AE79652CECFAFE00FC01EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		06AE79662CECFAFE00FC01EF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06AE79652CECFAFE00FC01EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		06AE79682CECFAFE00FC01EF /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06AE79652CECFAFE00FC01EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		06AE796A2CECFAFE00FC01EF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06AE79652CECFAFE00FC01EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C984DCC62CECF878007F65A1 /* Project object */;
 }
