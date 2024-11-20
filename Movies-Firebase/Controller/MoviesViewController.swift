@@ -5,6 +5,7 @@
 //  Created by Gurpreet Kaur on 2024-11-19.
 //
 
+import FirebaseAuth
 import FirebaseFirestore
 import Kingfisher
 import UIKit
@@ -20,9 +21,6 @@ class MoviesViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
-
-        // Hide the back button
-        navigationItem.hidesBackButton = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,15 +28,14 @@ class MoviesViewController: UIViewController {
         fetchMovies()
     }
 
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
+    @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+    }
 
     func fetchMovies() {
         db.collection("movies").getDocuments { quertSnapshot, error in
@@ -48,12 +45,13 @@ class MoviesViewController: UIViewController {
                 self.movies = []
                 for document in quertSnapshot!.documents {
                     let data = document.data()
+                    let id = document.documentID
                     let title = data["title"] as? String ?? ""
                     let thumbnail = data["thumbnail"] as? String ?? ""
                     let studio = data["studio"] as? String ?? ""
                     let rating = data["rating"] as? Double ?? 0.0
                     let userId = data["userId"] as? String ?? ""
-                    let movie = Movie(title: title, thumbnail: thumbnail, studio: studio, rating: rating, userId: userId)
+                    let movie = Movie(id: id, title: title, thumbnail: thumbnail, studio: studio, rating: rating, userId: userId)
                     self.movies.append(movie)
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -67,6 +65,21 @@ class MoviesViewController: UIViewController {
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedMovie = movies[indexPath.row]
+        performSegue(withIdentifier: "GoToUpdateMovie", sender: selectedMovie)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToUpdateMovie" {
+            if let updateVC = segue.destination as? UpdateMovieViewController,
+               let selectedMovie = sender as? Movie {
+                updateVC.movie = selectedMovie
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

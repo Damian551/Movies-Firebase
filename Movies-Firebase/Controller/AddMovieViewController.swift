@@ -36,19 +36,17 @@ class AddMovieViewController: UIViewController {
             return
         }
 
-        let movie = Movie(title: title, thumbnail: thumbnail, studio: studio, rating: rating, userId: userId ?? "")
-
         db.collection("movies").addDocument(data: [
-            "title": movie.title,
-            "thumbnail": movie.thumbnail,
-            "studio": movie.studio,
-            "rating": movie.rating,
-            "userId": movie.userId,
+            "title": title,
+            "thumbnail": thumbnail,
+            "studio": studio,
+            "rating": rating,
+            "userId": userId!,
         ]) { error in
             if let error = error {
                 print("Error adding document: \(error)")
             } else {
-                print("Document added with ID: \(movie.title)")
+                print("Document added with ID: \(title)")
 
                 // Navigate back
                 DispatchQueue.main.async {

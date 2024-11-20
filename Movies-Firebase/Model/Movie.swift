@@ -8,6 +8,7 @@
 import Foundation
 
 struct Movie {
+    var id: String
     var title: String
     var thumbnail: String
     var studio: String
