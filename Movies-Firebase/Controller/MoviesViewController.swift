@@ -5,16 +5,15 @@
 //  Created by Gurpreet Kaur on 2024-11-19.
 //
 
+import FirebaseFirestore
 import Kingfisher
 import UIKit
 
 class MoviesViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
 
-    var movies: [Movie] = [
-        Movie(title: "Inception", thumbnail: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", studio: "Warner Bros", rating: 9.0, userId: "2ubvKSLumpaEkpodh30JUMdjKZM2"),
-        Movie(title: "Matrix", thumbnail: "https://www.rogerebert.com/wp-content/uploads/2024/03/The-Matrix.jpg", studio: "Matrix Studios", rating: 9.9, userId: "2ubvKSLumpaEkpodh30JUMdjKZM2"),
-    ]
+    let db = Firestore.firestore()
+    var movies: [Movie] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +25,11 @@ class MoviesViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchMovies()
+    }
+
     /*
      // MARK: - Navigation
 
@@ -35,6 +39,29 @@ class MoviesViewController: UIViewController {
          // Pass the selected object to the new view controller.
      }
      */
+
+    func fetchMovies() {
+        db.collection("movies").getDocuments { quertSnapshot, error in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                self.movies = []
+                for document in quertSnapshot!.documents {
+                    let data = document.data()
+                    let title = data["title"] as? String ?? ""
+                    let thumbnail = data["thumbnail"] as? String ?? ""
+                    let studio = data["studio"] as? String ?? ""
+                    let rating = data["rating"] as? Double ?? 0.0
+                    let userId = data["userId"] as? String ?? ""
+                    let movie = Movie(title: title, thumbnail: thumbnail, studio: studio, rating: rating, userId: userId)
+                    self.movies.append(movie)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
