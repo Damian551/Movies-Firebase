@@ -10,7 +10,6 @@ import Foundation
 struct Movie {
     var title: String
     var thumbnail: String
-    var description: String
     var studio: String
     var rating: Double
     var userId: String
