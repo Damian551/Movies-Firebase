@@ -8,12 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func SignInGoogleButtonPressed(_ sender: UIButton) {
+        // TODO: Add Google Sign in
+    }
 }
-
